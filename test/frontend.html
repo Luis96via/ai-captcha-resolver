@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resolvedor de Captchas (Gemini API)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 400px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 24px; }
+    h2 { text-align: center; color: #333; }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; margin-bottom: 6px; color: #444; }
+    input[type="file"] { width: 100%; }
+    button { width: 100%; padding: 10px; background: #0077ff; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button:disabled { background: #aaa; }
+    .result { margin-top: 20px; padding: 12px; background: #e9f7ef; border-radius: 4px; color: #222; min-height: 32px; text-align: center; }
+    .preview { display: flex; justify-content: center; margin-bottom: 12px; }
+    .preview img { max-width: 180px; max-height: 120px; border: 1px solid #ccc; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Resolvedor de Captchas</h2>
+    <form id="captchaForm">
+      <div class="form-group">
+        <label for="imageInput">Selecciona una imagen PNG o JPG:</label>
+        <input type="file" id="imageInput" name="image" accept="image/png, image/jpeg" required>
+      </div>
+      <div class="preview" id="previewContainer" style="display:none;">
+        <img id="previewImg" src="" alt="Previsualización">
+      </div>
+      <button type="submit" id="submitBtn">Extraer texto</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    const form = document.getElementById('captchaForm');
+    const imageInput = document.getElementById('imageInput');
+    const resultDiv = document.getElementById('result');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImg = document.getElementById('previewImg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    imageInput.addEventListener('change', () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          previewImg.src = e.target.result;
+          previewContainer.style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        previewContainer.style.display = 'none';
+        previewImg.src = '';
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultDiv.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Procesando...';
+      const file = imageInput.files[0];
+      if (!file) {
+        resultDiv.textContent = 'Por favor selecciona una imagen.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Extraer texto';
+        return;
+      }
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        const res = await fetch('http://localhost:8888/.netlify/functions/extract-text', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok) {
+          resultDiv.textContent = data.text;
+        } else {
+          resultDiv.textContent = data.error || 'Error desconocido.';
+        }
+      } catch (err) {
+        resultDiv.textContent = 'Error de conexión o del servidor.';
+      }
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Extraer texto';
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,9 @@
+### Prueba de la API (reemplaza la URL si es necesario)
+POST http://localhost:8888/.netlify/functions/extract-text
+Content-Type: application/json
+
+{
+  "imageBase64": "<BASE64_DE_TU_IMAGEN>",
+  "mimeType": "image/png",
+  "prompt": ""
+} 
