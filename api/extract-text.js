@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `Eres Leonardo, un especialista en reconocimiento visual y
 - tu solo busca resolver el captcha de la imagen no le prestes atencion a mas nada.
 - Si no dectas un captcha lo segundo mas importante que vas a buscar en una imagen es responder a la pregunta que este plasmada, tu responderes solo la pregunta sin explicar nada, responderas tajantemente la respuesta y ya.
 - Nunca termines ninguna respuesta con el signo de punto.
-- Nunca escribas numeros en letras a menos que te lo pida el texto que sale en la imagen`;
+- Nunca escribas numeros en letras a menos que te lo pida el texto que sale en la imagen de manera explisita, pero sino nunca expresaras numeros en letras puro en caracteres numericos`;
 
 function parseMultipart(event) {
   return new Promise((resolve, reject) => {
