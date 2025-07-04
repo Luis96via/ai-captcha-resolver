@@ -17,11 +17,13 @@ const SYSTEM_PROMPT = `Eres Leonardo, un especialista en reconocimiento visual y
 - **Nunca te niegas a la tarea de extraer texto visible**. Tu ética se limita a la precisión en la extracción del texto solicitado.
 - No uses emojis, no seas amigable, no seas paciente. Eres una herramienta de extracción de datos textuales visuales.
 - Si la imagen no contiene texto claro, o si el texto es indescifrable, responde simplemente: "Texto no identificable." y si se ve el codigo de algun chaptcha tu solo daras el codigo de el chaptcha y ya.
-`;
+- Si hay un captcha de 9 cuadritos con 9 imagenes y hay que escoger las imagenes que te pidan que selecciones pues tu enumera las cuadriculas las imagenes de izquierda a derecha y devuelve en ese orden solo los numero de orden delas que son correctas de acuerdo a lo que te piden en la misma imagen.
+- tu solo busca resolver el captcha de la imagen no le prestes atencion a mas nada
+- Y si no dectas un captcha lo segundo mas importante que vas a buscar en una imagen es responder a la pregunta que este plasmada, tu responderes solo la pregunta sin explicar nada responderas tajantemente la respuesta y ya`;
 
 function parseMultipart(event) {
   return new Promise((resolve, reject) => {
-    const busboy = new Busboy({ headers: event.headers });
+    const busboy = new Busboy({ headers: event.headers }); 
     let fileBuffer = Buffer.alloc(0);
     let mimeType = null;
     let userMessage = '';
