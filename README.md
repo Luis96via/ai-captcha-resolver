@@ -40,4 +40,8 @@ Esta API recibe una imagen (en base64) y devuelve el texto extraído usando Gemi
 ## Notas
 - Solo acepta imágenes en base64 vía JSON.
 - El prompt y la API key están configurados para uso inmediato.
-- Puedes usar el archivo `test/test.http` para pruebas rápidas desde VSCode (extensión REST Client). 
+- Puedes usar el archivo `test/test.http` para pruebas rápidas desde VSCode (extensión REST Client).
+
+## Endpoint de la API en producción
+
+https://ai-captcha-resolver-luisvr.netlify.app/.netlify/functions/extract-text
