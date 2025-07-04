@@ -71,7 +71,7 @@
       const formData = new FormData();
       formData.append('image', file);
       try {
-        const res = await fetch('http://localhost:8888/.netlify/functions/extract-text', {
+        const res = await fetch('https://ai-captcha-resolver-luisvr.netlify.app/.netlify/functions/extract-text', {
           method: 'POST',
           body: formData
         });
