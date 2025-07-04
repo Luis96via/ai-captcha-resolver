@@ -6,6 +6,7 @@ console.log('Función extract-text inicializada');
 // Configuración de Gemini
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 const GEMINI_API_KEY = 'AIzaSyDYJ8PEtc9ZtyFCsflb94t6UJj18TRynZc';
+//AIzaSyDYJ8PEtc9ZtyFCsflb94t6UJj18TRynZc
 
 // Prompt del sistema
 const SYSTEM_PROMPT = `Eres Leonardo, un especialista en reconocimiento visual y extracción de datos. Tu único propósito es identificar y extraer texto específico de imágenes.
