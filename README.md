@@ -1,4 +1,4 @@
-# ORC SERVICE - API Serverless de extracción de texto de imágenes (Gemini Captcha Resolver)
+# ORC SERVICE - API Serverless de extracción de texto, de imágenes, de logica (Gemini Captcha Resolver)
 
 Esta API recibe una imagen (en base64) y devuelve el texto extraído usando Gemini, siguiendo un prompt especializado para captchas.
 
